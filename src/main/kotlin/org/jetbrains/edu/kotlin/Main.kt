@@ -1,5 +1,5 @@
 package org.jetbrains.edu.kotlin
 
-fun main(args: Array<String>) {
-    // Call your cli application here, passing the args
-}
+import com.github.ajalt.clikt.core.main
+
+fun main(args: Array<String>) = WikiGame().main(args)

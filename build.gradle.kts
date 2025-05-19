@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "2.0.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("com.saveourtool.diktat") version "2.0.0"
+    id("io.ktor.plugin") version "2.3.12"
     application
 }
 
@@ -16,6 +17,10 @@ repositories {
 
 dependencies {
     implementation("org.jsoup:jsoup:1.17.2")
+    implementation("io.ktor:ktor-client-core")
+    implementation("io.ktor:ktor-client-cio")
+    implementation("io.ktor:ktor-client-logging")
+    implementation("com.github.ajalt.clikt:clikt:5.0.3")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")

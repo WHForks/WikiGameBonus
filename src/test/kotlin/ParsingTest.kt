@@ -4,12 +4,14 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+import kotlinx.coroutines.runBlocking
+
 internal class ParsingTest {
     @ParameterizedTest
     @MethodSource("referencesData")
     fun referencesExtractorTest(url: String, expectedReferences: List<String>, referencesNumber: Int) {
         val wikiRacer = WikiRacer.get(1)
-        val references = wikiRacer.getReferences(url)
+        val references = runBlocking { wikiRacer.getReferences(url) }
         assertEquals(
             referencesNumber,
             references.size,
@@ -25,8 +27,8 @@ internal class ParsingTest {
         fun referencesData() = listOf(
             Arguments.of(
                 "https://en.wikipedia.org/wiki/Kotlin_(programming_language)aaaaa",
-                emptyList<String>(),
-                0,
+                listOf("https://en.wikipedia.org/wiki/Case_sensitivity"),
+                1
             ),
             Arguments.of(
                 "https://en.wikipedia.org/wiki/Kotlin_(programming_language)",
@@ -35,7 +37,7 @@ internal class ParsingTest {
                     "https://en.wikipedia.org/wiki/Java_Community_Process",
                     "https://en.wikipedia.org/wiki/JetBrains",
                 ),
-                229
+                231
             ),
         )
     }
